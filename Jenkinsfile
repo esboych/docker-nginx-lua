@@ -7,9 +7,9 @@ pipeline {
             }
         }
         stage('Build container') {
-            steps {
+            try {
                 docker.build("test-nginx-jenkins-op:${env.BUILD_NUMBER}")
-            }
+            } catch(){}
         }
     }
     post {
