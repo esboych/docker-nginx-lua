@@ -6,14 +6,15 @@ pipeline {
                 echo 'Example step 1'
             }
         }
+        stage('Build container') {
+            steps {
+                docker.build("test-nginx-jenkins-op:${env.BUILD_NUMBER}")
+            }
+        }
     }
     post {
-          checkout scm
-
-            def customImage = docker.build("my-image:${env.BUILD_ID}")
-
-            customImage.inside {
-                sh 'make test'
-            }
+        always {
+            echo 'Finished!'
+        }
     }
 }
