@@ -8,8 +8,12 @@ pipeline {
         }
     }
     post {
-        always {
-            echo 'example step 2-2'
-        }
+          checkout scm
+
+            def customImage = docker.build("my-image:${env.BUILD_ID}")
+
+            customImage.inside {
+                sh 'make test'
+            }
     }
 }
