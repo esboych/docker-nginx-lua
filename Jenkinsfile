@@ -9,7 +9,7 @@ pipeline {
         stage('Build container') {
             try {
                 docker.build("test-nginx-jenkins-op:${env.BUILD_NUMBER}")
-            } catch(){}
+            } catch(error){}
         }
     }
     post {
