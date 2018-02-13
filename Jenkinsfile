@@ -14,11 +14,6 @@ node {
         app = docker.build("test-nginx-jenkins-op:${env.BUILD_NUMBER}", ".")
     }
 
-    stage('Test image') {
-        app.inside {
-            sh 'echo "Tests passed"'
-        }
-    }
 
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
