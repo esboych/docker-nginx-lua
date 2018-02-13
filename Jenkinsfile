@@ -26,10 +26,17 @@ node {
         }
     }
 
-        stage('Deploy image') {
-            /* ssh to host machine and run newly pushed image */
-            echo 'ssh to web server and tell it to pull new image'
-            sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com ls -la'
-            
-        }
+    sshagent(['08f7edc5-286e-4fba-9883-b8fea9225d1a']) {
+        // some block
+                    sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com ls -la'
+
+    }
+
+
+    stage('Deploy image') {
+        /* ssh to host machine and run newly pushed image */
+        echo 'ssh to web server and tell it to pull new image'
+        sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com ls -la'
+
+    }
 }
