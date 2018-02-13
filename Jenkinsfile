@@ -25,4 +25,11 @@ node {
             app.push("latest")
         }
     }
+
+        stage('Deploy image') {
+            /* ssh to host machine and run newly pushed image */
+            echo 'ssh to web server and tell it to pull new image'
+            sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com ls -la'
+            }
+        }
 }
