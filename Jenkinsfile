@@ -31,7 +31,7 @@ node {
        //sh 'ssh -o StrictHostKeyChecking=no -l cloudbees 192.168.1.106 uname -a'
          sh 'ssh -o StrictHostKeyChecking=no -l ubuntu ec2-54-191-128-143.us-west-2.compute.amazonaws.com uname -a'
          sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com pwd'
-         sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com docker run -p 80:80 -d esboych/test-nginx-jenkins-op:2'
+         sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com sudo docker run -p 80:80 -d esboych/test-nginx-jenkins-op:2'
 
     }
 
