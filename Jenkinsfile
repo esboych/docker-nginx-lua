@@ -27,9 +27,10 @@ node {
          sh "echo ${containerID}"
         /* First try to delete previous container if any */
          //sh "ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com sudo docker rm -f \$(sudo docker ps | grep test-nginx-jenkins-op | awk '{print \$1}') || true"
-         sh "ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com sudo docker rm -f '${containerID}' || true"
+         //sh "ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com sudo docker rm -f '${containerID}' || true"
+         sh "ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com sudo docker rm -f nginx || true"
         /* Now deploy the new one */
-         sh "ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com  sudo docker run -p 80:80 -d esboych/test-nginx-jenkins-op"
+         sh "ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com  sudo docker --name=nginx run -p 80:80 -d esboych/test-nginx-jenkins-op"
 
     }
 
