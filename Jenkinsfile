@@ -2,8 +2,7 @@ node {
     def app
 
     stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
-
+        /* Cloning the repo to our workspace */
         checkout scm
     }
 
@@ -16,19 +15,19 @@ node {
 
 
     stage('Push image') {
-        /* Push the image to public regisry. The latest tag used for simplicity */
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+        /* Pushing the image to public registry. The "latest" tag used for simplicity */
+        docker.withRegistry("https://registry.hub.docker.com", "docker-hub-credentials") {
             app.push("latest")
         }
     }
 
     sshagent(['08f7edc5-286e-4fba-9883-b8fea9225d1a']) {
         /* Pull and deploy containerised app */
-         sh 'ssh -o StrictHostKeyChecking=no -l ubuntu ec2-54-191-128-143.us-west-2.compute.amazonaws.com uname -a'
-        /* First try to delete previous container */
+         sh "ssh -o StrictHostKeyChecking=no -l ubuntu ec2-54-191-128-143.us-west-2.compute.amazonaws.com sudo docker ps | grep test-nginx-jenkins-op | awk '{print \$1}'"
+        /* First try to delete previous container if any */
          sh "ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com sudo docker rm -f \$(sudo docker ps | grep test-nginx-jenkins-op | awk '{print \$1}') || true"
         /* Now deploy the new one */
-         sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com  sudo docker run -p 80:80 -d esboych/test-nginx-jenkins-op'
+         sh "ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com  sudo docker run -p 80:80 -d esboych/test-nginx-jenkins-op"
 
     }
 
