@@ -1,3 +1,11 @@
+/*
+Prerequisites:
+- jenkins is run in dind container on the same host.
+-- Repo:https://github.com/esboych/docker-jenkins-dind
+-- command: sudo docker run --name jenkins-dind --privileged -p 8080:8080 -d -v /home/ubuntu/jenkins:/var/lib/jenkins esboych/docker-jenkins-dind
+- on EC2 inbound rules: ports # 22, 80, 8080 are enable dfor ssh, jenkins web console and nginx respectively
+*/
+
 node {
     def app
 
