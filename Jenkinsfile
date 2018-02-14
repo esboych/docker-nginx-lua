@@ -28,7 +28,9 @@ node {
     sshagent(['08f7edc5-286e-4fba-9883-b8fea9225d1a']) {
         /* Pull and deploy containerised app */
          sh 'ssh -o StrictHostKeyChecking=no -l ubuntu ec2-54-191-128-143.us-west-2.compute.amazonaws.com uname -a'
-         sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com sudo docker rm -f (sudo docker ps | grep test-nginx-jenkins-op | awk '{print $1}') || true'
+        /* First try to delete previous container */
+         sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com sudo docker rm -f $(sudo docker ps | grep test-nginx-jenkins-op | awk '{print $1}') || true'
+        /* Now deploy the new one */
          sh 'ssh ubuntu@ec2-54-191-128-143.us-west-2.compute.amazonaws.com  sudo docker run -p 80:80 -d esboych/test-nginx-jenkins-op'
 
     }
