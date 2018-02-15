@@ -16,6 +16,7 @@ ENV LUAJIT_INC /usr/local/include/luajit-2.0
 
 RUN apt-get -qq update
 RUN apt-get -qq -y install wget
+RUN apt-get -qq -y install mc
 
 # ***** BUILD DEPENDENCIES *****
 
@@ -69,6 +70,7 @@ RUN rm -rf /${LUA_NGINX_MODULE}
 # TODO: Remove env vars used only for build?
 
 # ***** ADD SAMPLE WEB PAGE ******
+COPY nginx.conf /etc/nginx/nginx.conf
 ADD index.html /data/www/
 
 # This is the default CMD used by nginx:1.9.2 image
