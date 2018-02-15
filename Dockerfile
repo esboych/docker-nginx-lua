@@ -71,7 +71,7 @@ RUN rm -rf /${LUA_NGINX_MODULE}
 
 # ***** ADD SAMPLE WEB PAGE ******
 #/nginx/conf
-COPY nginx.conf ${NGINX_ROOT}/nginx.conf
+COPY nginx.conf ${NGINX_ROOT}/conf/nginx.conf
 #COPY nginx.conf /etc/nginx/nginx.conf
 ADD index.html /data/www/
 
