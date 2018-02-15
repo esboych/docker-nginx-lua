@@ -70,7 +70,9 @@ RUN rm -rf /${LUA_NGINX_MODULE}
 # TODO: Remove env vars used only for build?
 
 # ***** ADD SAMPLE WEB PAGE ******
-COPY nginx.conf /etc/nginx/nginx.conf
+#/nginx/conf
+COPY nginx.conf ${NGINX_ROOT}/nginx.conf
+#COPY nginx.conf /etc/nginx/nginx.conf
 ADD index.html /data/www/
 
 # This is the default CMD used by nginx:1.9.2 image
