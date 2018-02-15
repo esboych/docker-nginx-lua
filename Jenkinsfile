@@ -18,15 +18,14 @@ node {
     }
 
     stage('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
+        /* This builds the actual image; synonymous to docker build on the command line */
         //app = docker.build("esboych/test-nginx-jenkins-op:${env.BUILD_NUMBER}", ".")
         app = docker.build("esboych/test-nginx-jenkins-op", ".")
     }
 
 
     stage('Push image') {
-        /* Pushing the image to public registry. The "latest" tag used for simplicity */
+        /* Pushing the image to the public registry. The "latest" tag used for simplicity */
         docker.withRegistry("https://registry.hub.docker.com", "docker-hub-credentials") {
         app.push("latest")
         }
