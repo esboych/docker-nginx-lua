@@ -17,45 +17,22 @@ The docker image is based on the manual compilation instructions at ...
 
 Useful for those who want Nginx with Lua but don't want to use OpenResty
 
+upd: Dockerfile is changed to contain the last version of lua module
+
 Usage
 -----
 
-1. Create your own **Dockerfile** ...
-
-    ```
-    FROM danday74/nginx-lua
-    COPY /your/nginx.conf /nginx/conf/nginx.conf
+1. Run ./run_dcoker_machine to create an aws instance and launch jenkins master in dind container on it
     ```
 
-2. Add this location block to your **nginx.conf** file
-
-    ```
-    location /hellolua {
-        content_by_lua '
-            ngx.header["Content-Type"] = "text/plain";
-            ngx.say("hello world");
-        ';
-    }
-    ```
+2. If successfull you will be prompted with Jenkisn web console ip, master password and GitHub webhook endpoint
 
     If you don't have an **nginx.conf** file then use [the conf file](https://raw.githubusercontent.com/danday74/docker-nginx-lua/master/nginx.conf) provided in the github repo
     
     The conf file provided is the default generated conf file with the above location block added
 
-3. Build your docker image
+3. Jenkins might be managed via webconsole to enable build on GitHub push
 
-4. Run your docker container - Remember to use **-p YOUR_PORT:80** in your docker run statement
-
-5. Visit http://localhost:YOUR_PORT/hellolua
-
-Automated
----------
-
-The master branch on the github repo is watched by an automated docker build
-
-Which builds docker image **danday74/nginx-lua** on push to master
-
-On success, the docker build triggers the docker repo's webhooks (if any)
 
 License
 -------
